@@ -1,4 +1,4 @@
-import type { Producto } from '../types/producto';
+import type { Product } from '../types/product';
 
 export const categorias: string[] = [
     'Hamburguesas',
@@ -7,7 +7,7 @@ export const categorias: string[] = [
     'Bebidas'
 ];
 
-export const productos: Producto[] = [
+export const productos: Product[] = [
     {
         id: 1,
         nombre: 'Hamburguesa Triple',
