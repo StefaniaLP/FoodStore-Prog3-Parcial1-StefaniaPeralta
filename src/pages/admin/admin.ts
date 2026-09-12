@@ -1,5 +1,5 @@
 import '../../style.css';
-import {categorias, productos} from '../../data/productos';
+import {PRODUCTS, getCategories} from '../../data/data.ts';
 
 const tablaProductos =
     document.querySelector<HTMLTableSectionElement>('#tabla-productos');
@@ -11,21 +11,21 @@ const selectCategoria =
 // CARGAR CATEGORIAS
 // =============================
 
-const cargarCategoriasAdmin = () => {
+const cargarCategoriasAdmin = (): void => {
 
     if (!selectCategoria) {
         return;
     }
 
+    const categorias = getCategories();
+
     categorias.forEach((categoria) => {
+        const option = document.createElement('option');
 
-        const option =
-            document.createElement("option");
+        option.value = categoria.id.toString();
+        option.textContent = categoria.nombre;
 
-        option.value = categoria;
-        option.textContent = categoria;
-
-        selectCategoria.append(option);
+        selectCategoria.appendChild(option);
     });
 };
 
@@ -38,40 +38,22 @@ const cargarProductosAdmin = () => {
     if (!tablaProductos) {
         return;
     }
-    
-    productos.forEach((producto) => {
-        
-        const fila =
-            document.createElement("tr");
+
+    PRODUCTS.forEach((producto) => {
+        const fila = document.createElement("tr");
 
         fila.innerHTML = `
             <td>${producto.id}</td>
-
-            <td>
-                <img
-                    src="${producto.imagen}"
-                    alt="${producto.nombre}"
-                    width="60">
-            </td>
-
             <td>${producto.nombre}</td>
-
-            <td>${producto.categoria}</td>
-
+            <td>${producto.descripcion}</td>
             <td>$${producto.precio}</td>
-
-            <td>
-                <button type="button">
-                    Editar
-                </button>
-
-                <button type="button">
-                    Eliminar
-                </button>
+            <td>${producto.categorias
+            .map(categoria => categoria.nombre)
+            .join(", ")}
             </td>
         `;
 
-        tablaProductos.append(fila);
+        tablaProductos.appendChild(fila);
     });
 };
 

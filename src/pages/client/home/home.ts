@@ -1,6 +1,4 @@
-import "../../../style.css";
-
-import { PRODUCTS, getCategoria } from "../../../data/data";
+import { PRODUCTS, getCategories } from "../../../data/data";
 import type { IProduct } from "../../../types/product";
 import { addToCart } from "../../../utils/cart";
 
@@ -13,7 +11,7 @@ const renderCategories = (): void => {
         return;
     }
 
-    const categorias = getCategoria();
+    const categorias = getCategories();
 
     listaCategorias.innerHTML = "";
 
@@ -44,6 +42,18 @@ const renderCategories = (): void => {
 
         enlace.textContent = categoria.nombre;
         enlace.href = "#";
+
+        enlace.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            const productosFiltrados = PRODUCTS.filter((producto) =>
+                producto.categorias.some(
+                    (cat) => cat.id === categoria.id
+                )
+            );
+
+            renderProducts(productosFiltrados);
+        });
 
         li.append(enlace);
 
@@ -109,6 +119,33 @@ const renderProducts = (productos: IProduct[]): void => {
         contenedorProductos.append(article);
     });
 };
+
+// FORM BUSQUEDA
+
+const inputBusqueda =
+    document.querySelector<HTMLInputElement>("#input-busqueda");
+
+if (inputBusqueda) {
+
+    inputBusqueda.addEventListener("input", () => {
+
+        const textoBusqueda =
+            inputBusqueda.value.trim().toLowerCase();
+
+        if (textoBusqueda === "") {
+            renderProducts(PRODUCTS);
+            return;
+        }
+
+        const productosFiltrados = PRODUCTS.filter((producto) =>
+            producto.nombre
+                .toLowerCase()
+                .includes(textoBusqueda)
+        );
+
+        renderProducts(productosFiltrados);
+    });
+}
 
 renderCategories();
 renderProducts(PRODUCTS);

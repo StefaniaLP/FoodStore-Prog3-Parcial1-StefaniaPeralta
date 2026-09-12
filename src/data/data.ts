@@ -291,6 +291,6 @@ export const PRODUCTS: IProduct[] = [
 ]
  
 
-export function getCategoria(): ICategoria[] {
+export function getCategories(): ICategoria[] {
   return categorias.filter((c) => !c.eliminado);
 }

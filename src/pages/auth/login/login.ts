@@ -49,7 +49,7 @@ formulario?.addEventListener('submit', (event: SubmitEvent) => {
     if (usuarioEncontrado.rol === 'admin') {
         navigate('/src/pages/admin/home.html');
     } else {
-        navigate('/src/pages/client/home.html');
+        navigate('/src/pages/client/home/home.html');
     }
 
 });
