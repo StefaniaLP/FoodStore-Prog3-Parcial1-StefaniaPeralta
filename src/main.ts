@@ -11,7 +11,7 @@ if (rutaActual === '/') {
 if (rutaActual.includes('/admin/')) {
     checkAuthUser(
         '/src/pages/auth/login/login.html',
-        '/src/pages/client/home.html',
+        '/src/pages/client/home/home.html',
         'admin'
     );
 }

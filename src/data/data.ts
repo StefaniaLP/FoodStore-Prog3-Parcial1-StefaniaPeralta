@@ -1,4 +1,4 @@
-import type { Product } from "../types/product";
+import type { IProduct } from "../types/product";
 import type { ICategoria } from "../types/categoria";
 
 
@@ -47,7 +47,7 @@ const categorias: ICategoria[] = [
   },
 ];
 
-export const PRODUCTS: Product[] = [
+export const PRODUCTS: IProduct[] = [
   {
     id: 1,
     eliminado: false,

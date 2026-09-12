@@ -9,9 +9,9 @@
         <header>
             <h1>🍔 Food Store</h1>
             <nav>
-                <a href="#">Inicio</a>
+                <a href="./home.html">Inicio</a>
                 <a href="#">Mis Pedidos</a>
-                <a href="#">Carrito</a>
+                <a href="../cart/cart.html">Carrito</a>
                 <button id="btn-logout">
                     Cerrar sesión
                 </button>
@@ -24,8 +24,12 @@
         </aside>
 
         <main>
-            <form>
-                <input type="text" placeholder="Buscar productos...">
+            <form id="form-busqueda">
+                <input
+                        type="text"
+                        id="input-busqueda"
+                        placeholder="Buscar productos..."
+                >
                 <button type="submit">Buscar</button>
             </form>
             
@@ -38,8 +42,8 @@
             <p>Contacto: info@foodstore.com</p>
         </footer>
 
-        <script type="module" src="/src/main.ts"></script>
-        <script type="module" src="./client.ts"></script>
+        <script type="module" src="../../../main.ts"></script>
+        <script type="module" src="./home.ts"></script>
 
 
     </body>
