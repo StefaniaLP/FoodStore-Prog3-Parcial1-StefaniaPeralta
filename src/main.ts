@@ -1,4 +1,4 @@
-import './style.css'
+import './style.css';
 import { navigate } from './utils/navigate';
 import { checkAuthUser, logout} from './utils/auth';
 

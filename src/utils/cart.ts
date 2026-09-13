@@ -69,3 +69,13 @@ export const calculateTotal = (): number => {
 
     return total;
 };
+
+export const removeFromCart = (productoId: number): void => {
+    const cart = getCartItems();
+
+    const nuevoCart = cart.filter(
+        (item) => item.producto.id !== productoId
+    );
+
+    saveCart(nuevoCart);
+};

@@ -1,6 +1,5 @@
 import type { ICartItem } from "../../../types/product";
-import { getCartItems, calculateTotal} from "../../../utils/cart";
-
+import { getCartItems, calculateTotal, updateQuantity, removeFromCart } from "../../../utils/cart";
 
 const renderCart = (): void => {
 
@@ -32,7 +31,15 @@ const renderCart = (): void => {
 
         const article = document.createElement("article");
 
+        article.classList.add("cart-item");
+
         article.innerHTML = `
+
+            <img
+                class="cart-image"
+                src="/assets/${item.producto.imagen}"
+                alt="${item.producto.nombre}"
+            >
             <h3>${item.producto.nombre}</h3>
 
             <p>
@@ -40,16 +47,60 @@ const renderCart = (): void => {
                 $${item.producto.precio}
             </p>
 
-            <p>
-                Cantidad:
-                ${item.cantidad}
-            </p>
+            <div class="cantidad">
+                <span>Cantidad:</span>
+                <button class="btn-restar">−</button>
+                <span>${item.cantidad}</span>
+                <button class="btn-sumar">+</button>
+            </div>
 
             <p>
                 Subtotal:
                 $${item.producto.precio * item.cantidad}
             </p>
+            <button class="btn-eliminar"> Eliminar</button>
         `;
+
+        const btnRestar =
+            article.querySelector<HTMLButtonElement>(".btn-restar");
+
+        const btnSumar =
+            article.querySelector<HTMLButtonElement>(".btn-sumar");
+
+        const btnEliminar =
+            article.querySelector<HTMLButtonElement>(".btn-eliminar");
+
+        btnSumar?.addEventListener("click", () => {
+
+            updateQuantity(
+                item.producto.id,
+                item.cantidad + 1
+            );
+
+            renderCart();
+        });
+
+
+        btnRestar?.addEventListener("click", () => {
+
+            if (item.cantidad > 1) {
+
+                updateQuantity(
+                    item.producto.id,
+                    item.cantidad - 1
+                );
+
+                renderCart();
+            }
+        });
+
+        btnEliminar?.addEventListener("click", () => {
+
+            removeFromCart(item.producto.id);
+
+            renderCart();
+        });
+
 
         contenedorCarrito.append(article);
     });
