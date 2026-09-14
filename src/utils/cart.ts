@@ -69,7 +69,7 @@ export const calculateTotal = (): number => {
 
     return total;
 };
-
+ //Remover un articulo del carrito
 export const removeFromCart = (productoId: number): void => {
     const cart = getCartItems();
 
